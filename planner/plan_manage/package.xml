@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ego_planner</name>
+  <version>0.0.0</version>
+  <description>The ego_planner package</description>
+  <maintainer email="jane.doe@example.com">Jane Doe</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>quadrotor_msgs</depend>
+  <depend>plan_env</depend>
+  <depend>path_searching</depend>
+  <depend>traj_opt</depend>
+  <depend>traj_utils</depend>
+  <depend>eigen</depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>
