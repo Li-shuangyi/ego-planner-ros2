@@ -1,0 +1,21 @@
+<launch>
+ <arg name="enable_motion" default="false"/>
+ <arg name="map_topic" default="/map"/><arg name="odom_topic" default="/odom"/>
+ <arg name="goal_topic" default="/goal"/><arg name="cmd_topic" default="/cmd_vel"/>
+ <node pkg="ego_planner" exec="ego_planner_node" name="ego_planner" output="screen">
+  <param from="$(find-pkg-share ego_mpc_bringup)/config/planner.yaml"/>
+  <remap from="/goal" to="/navigation/goal"/><remap from="~/odom_world" to="$(var odom_topic)"/>
+  <remap from="~/planning/trajectory" to="/ego/trajectory"/><remap from="~/planning/heartbeat" to="/navigation/heartbeat"/>
+  <remap from="~/grid_map/cloud" to="/map2d/planning_cloud"/>
+ </node>
+ <node pkg="mpc" exec="mpc_controller_node" name="mpc" output="screen">
+  <param from="$(find-pkg-share ego_mpc_bringup)/config/mpc.yaml"/>
+  <remap from="~/odom" to="$(var odom_topic)"/><remap from="~/planning/trajectory" to="/ego/trajectory"/>
+  <remap from="~/cmd" to="/mpc/command"/>
+ </node>
+ <node pkg="ego_mpc_bringup" exec="navigation_node" name="ego_mpc_navigation" output="screen">
+  <param name="enable_motion" value="$(var enable_motion)"/>
+  <remap from="map" to="$(var map_topic)"/><remap from="odom" to="$(var odom_topic)"/>
+  <remap from="goal" to="$(var goal_topic)"/><remap from="cmd_vel" to="$(var cmd_topic)"/>
+ </node>
+</launch>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="3"><name>ego_mpc_bringup</name><version>0.1.0</version>
+<description>Ground planning, MPC tracking and guarded Twist output</description>
+<maintainer email="Li-shuangyi@users.noreply.github.com">Li-shuangyi</maintainer><license>GPL-3.0-only</license>
+<buildtool_depend>ament_cmake</buildtool_depend>
+<depend>rclcpp</depend>
+<depend>nav_msgs</depend>
+<depend>geometry_msgs</depend>
+<depend>sensor_msgs</depend>
+<depend>std_msgs</depend>
+<depend>quadrotor_msgs</depend>
+<depend>traj_utils</depend>
+<exec_depend>ego_planner</exec_depend><exec_depend>mpc</exec_depend><exec_depend>launch_ros</exec_depend><exec_depend>launch_xml</exec_depend>
+<export><build_type>ament_cmake</build_type></export></package>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>traj_opt</name>
+  <version>0.0.0</version>
+  <description>The traj_opt package</description>
+  <maintainer email="Li-shuangyi@users.noreply.github.com">Li-shuangyi</maintainer>
+  <license>GPL-3.0-only</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>plan_env</depend>
+  <depend>path_searching</depend>
+  <depend>traj_utils</depend>
+  <depend>eigen</depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

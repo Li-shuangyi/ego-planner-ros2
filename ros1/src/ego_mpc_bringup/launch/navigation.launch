@@ -1,0 +1,24 @@
+<launch>
+ <arg name="enable_motion" default="false"/>
+ <arg name="map_topic" default="/map"/><arg name="odom_topic" default="/odom"/>
+ <arg name="goal_topic" default="/goal"/><arg name="cmd_topic" default="/cmd_vel"/>
+ <arg name="publish_identity_tf" default="false"/>
+ <node if="$(arg publish_identity_tf)" pkg="tf2_ros" type="static_transform_publisher" name="map_world_identity" args="0 0 0 0 0 0 world map"/>
+ <node pkg="ego_planner" type="ego_planner_node" name="ego_planner" output="screen" required="true">
+  <rosparam command="load" file="$(find ego_mpc_bringup)/config/planner.yaml"/>
+  <remap from="/goal" to="/navigation/goal"/><remap from="~odom_world" to="$(arg odom_topic)"/>
+  <remap from="~planning/trajectory" to="/ego/trajectory"/><remap from="~planning/heartbeat" to="/navigation/heartbeat"/>
+  <remap from="~planning/stop" to="/navigation/stop"/>
+  <remap from="~grid_map/shared" to="$(arg map_topic)"/><remap from="~grid_map/applied" to="/navigation/map_applied"/>
+ </node>
+ <node pkg="mpc" type="mpc_controller_node" name="mpc" output="screen" required="true">
+  <rosparam command="load" file="$(find mpc)/config/param.yaml"/>
+  <param name="mpc/max_speed" value="0.4"/><param name="mpc/max_omega" value="0.8"/>
+  <remap from="~odom" to="$(arg odom_topic)"/><remap from="~planning/trajectory" to="/ego/trajectory"/>
+  <remap from="~cmd" to="/mpc/raw_cmd"/><remap from="~command" to="/mpc/command"/>
+ </node>
+ <node pkg="ego_mpc_bringup" type="navigation_node" name="ego_mpc_navigation" output="screen" required="true">
+  <param name="enable_motion" value="$(arg enable_motion)"/>
+  <remap from="odom" to="$(arg odom_topic)"/><remap from="goal" to="$(arg goal_topic)"/><remap from="cmd_vel" to="$(arg cmd_topic)"/>
+ </node>
+</launch>

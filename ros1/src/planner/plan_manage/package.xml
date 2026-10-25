@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ego_planner</name><version>0.1.0</version>
+  <description>EGO-MPC 2D ego_planner</description>
+  <maintainer email="Li-shuangyi@users.noreply.github.com">Li-shuangyi</maintainer>
+  <license>GPL-3.0-only</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>quadrotor_msgs</depend>
+  <depend>plan_env</depend>
+  <depend>path_searching</depend>
+  <depend>traj_opt</depend>
+  <depend>traj_utils</depend>
+  <depend>eigen</depend>
+  
+</package>
